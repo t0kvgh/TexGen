@@ -24,24 +24,24 @@ Textile.AssignDefaultDomain()
 # Add the textile to our TexGen singleton
 AddTextile(Textile)
 
-for TextileName, Textile in CTexGen.GetInstance().GetTextiles().iteritems():
-    print TextileName
+for TextileName, Textile in CTexGen.GetInstance().GetTextiles().items():
+    print(TextileName)
     for Yarn in Textile.GetYarns():
         # Get the Section Points
         for Node in Yarn.GetSlaveNodes(CYarn.SURFACE):
             for SectionPoint in Node.GetSectionPoints():
-                print SectionPoint.x, SectionPoint.y, SectionPoint.z
+                print(SectionPoint.x, SectionPoint.y, SectionPoint.z)
         # Get the repeat limits for the yarns
         RepeatLimits = Textile.GetDomain().GetRepeatLimits(Yarn)
         Repeats = Yarn.GetRepeats()
         for Repeat, Limits in zip(Repeats, RepeatLimits):
-            print "Repeat:", Repeat.x, Repeat.y, Repeat.z
-            print "Limits:", Limits[0], Limits[1]
+            print("Repeat:", Repeat.x, Repeat.y, Repeat.z)
+            print("Limits:", Limits[0], Limits[1])
     # Get the domain size
     Min, Max = Textile.GetDomain().GetMesh().GetAABB()
-    print "Domain Limits:"
-    print "Minimum:", Min.x, Min.y, Min.z
-    print "Maximum:", Max.x, Max.y, Max.z
+    print("Domain Limits:")
+    print("Minimum:", Min.x, Min.y, Min.z)
+    print("Maximum:", Max.x, Max.y, Max.z)
 
 
 # Get element orientations
@@ -51,15 +51,15 @@ for i in range(1000):
     # Generate some random points within the domain
     Points.append(XYZ(random()*12, random()*12, random()*4-1))
 
-for TextileName, Textile in CTexGen.GetInstance().GetTextiles().iteritems():
-    print TextileName
+for TextileName, Textile in CTexGen.GetInstance().GetTextiles().items():
+    print(TextileName)
     PointsInfo = PointInfoVector()
     Textile.GetPointInformation(Points, PointsInfo)
 
     for Point, PointInfo in zip(Points, PointsInfo):
-        print "Point:", Point.x, Point.y, Point.z
-        print "Yarn ID:", PointInfo.iYarnIndex
-        print "Tangent:", PointInfo.YarnTangent.x, PointInfo.YarnTangent.y, PointInfo.YarnTangent.z
+        print("Point:", Point.x, Point.y, Point.z)
+        print("Yarn ID:", PointInfo.iYarnIndex)
+        print("Tangent:", PointInfo.YarnTangent.x, PointInfo.YarnTangent.y, PointInfo.YarnTangent.z)
     
 
 
